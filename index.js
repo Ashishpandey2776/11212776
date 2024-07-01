@@ -7,7 +7,6 @@ const windowSize = 10;
 let slidingWindow = [];
 let authToken = '';
 
-// Replace with your actual credentials
 const credentials = {
   companyName: 'Ashish2776',
   clientID: 'e4257aa2-8e14-412b-b0aa-1363fa7addb3',
@@ -19,7 +18,6 @@ const credentials = {
 
 const testServerURL = 'http://20.244.56.144/test';
 
-// Function to authenticate and obtain token
 const authenticateAndGetToken = async () => {
   try {
     const response = await axios.post(`${testServerURL}/auth`, credentials);
@@ -29,8 +27,6 @@ const authenticateAndGetToken = async () => {
     throw new Error(`Error during authentication: ${error.message}`);
   }
 };
-
-// Function to fetch numbers from the test server
 const fetchNumbers = async (type) => {
   try {
     const response = await axios.get(`${testServerURL}/${type}`, {
@@ -74,7 +70,6 @@ const calculateAverage = (numbers) => {
   return (sum / numbers.length).toFixed(2);
 };
 
-// Endpoint to handle requests for different number IDs
 app.get('/numbers/:numberid', async (req, res) => {
   const numberID = req.params.numberid;
 
@@ -97,8 +92,7 @@ app.get('/numbers/:numberid', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch numbers' });
   }
 });
-
-// Start the server and authenticate on startup
+//port defime
 app.listen(port, async () => {
   console.log(`Server is running at http://localhost:${port}`);
   
@@ -106,6 +100,6 @@ app.listen(port, async () => {
     await authenticateAndGetToken();
   } catch (error) {
     console.error('Error starting server:', error.message);
-    process.exit(1); // Exit on critical errors
+    process.exit(1); 
   }
 });
